@@ -4,7 +4,7 @@ databases==0.9.0
 fastapi==0.111.0
 fastapi-pagination==0.12.25
 minio==7.2.7
-psycopg2==2.9.9
+psycopg2-binary
 urllib3==2.2.1
 uvicorn==0.30.1
 pytest
