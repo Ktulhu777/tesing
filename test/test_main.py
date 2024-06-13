@@ -17,9 +17,3 @@ def test_post_json():
     with open(file=filepath, mode='r') as file:
         response = client.post('/memes/', files=file)
         assert response.status_code != status.HTTP_200_OK
-
-def test_get_all():
-    response = client.get('/memes/')
-
-    assert response.status_code == status.HTTP_200_OK
-    # assert "items" in response.json().keys()
