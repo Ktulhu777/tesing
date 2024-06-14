@@ -8,24 +8,21 @@ networks:
 services:
   app:
     container_name: fastapi_app
-    build:
-      context: .
-
+    build: .
+    command: uvicorn main:app --reload --host=127.0.0.1 --port=8000
     depends_on:
       - db
       - minio
-#    command: sh -c 'while !/dev/tcp/postgres/5432; do sleep 1; done; uvicorn main:app --host 127.0.0.1 --port 8000'
-    command: uvicorn main:app
     volumes:
       - ./app:/app/app
     ports:
-      - 8000:8000
-    restart: always
+      - '8000:8000'
     environment:
       - MINIO_SERVER_ACCESS_KEY=${access_key}
       - MINIO_SERVER_SECRET_KEY=${secret_key}
     env_file:
       - .env
+
   db:
     container_name: project_postgres
     image: postgres
@@ -34,7 +31,7 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
     ports:
-      - 5432:5432
+      - '5432:5432'
     volumes:
       - .postgres:/var/lib/postgres/data
     restart: always
@@ -45,12 +42,13 @@ services:
     depends_on:
       - db
     container_name: project_minio
-    image: 'bitnami/minio:latest'
+    image: bitnami/minio:latest
     ports:
-      - 9000:9000
-      - 9001:9001
+      - '9000:9000'
+      - '9001:9001'
     environment:
       - MINIO_ROOT_USER=minioroot
       - MINIO_ROOT_PASSWORD=miniopassword
+      - MINIO_DEFAULT_BUCKETS=test
     networks:
       - app-tier
