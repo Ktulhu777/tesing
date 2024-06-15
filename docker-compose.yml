@@ -18,7 +18,7 @@ services:
     ports:
       - '8000:8000'
     environment:
-      DB_HOST: project_postgres
+      DB_HOST: db
       MINIO_SERVER_ACCESS_KEY: ${access_key}
       MINIO_SERVER_SECRET_KEY: ${secret_key}
     networks:
@@ -38,6 +38,8 @@ services:
     volumes:
       - .postgres:/var/lib/postgres/data
     restart: always
+    networks:
+      - app-tier
     env_file:
       - .env
 
