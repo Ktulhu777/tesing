@@ -5,8 +5,7 @@ DB_NAME
 DB_USER
 DB_PASS
 host='minio:9000'
-access_key='PI8CnlVViI7WewEbsWk0'
-secret_key="eKuAOVBfrBQ8iM8yNBzc5JvwzBaKgF0XI1969lKl"
+access_key
+secret_key
 
-После билда установить в minio указанные выше ключи: access_key, secret_key
 Логин и пароль от minio => minioroot, miniopassword
