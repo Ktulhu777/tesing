@@ -18,9 +18,11 @@ services:
     ports:
       - '8000:8000'
     environment:
-      - DB_HOST=project_postgres
-      - MINIO_SERVER_ACCESS_KEY=${access_key}
-      - MINIO_SERVER_SECRET_KEY=${secret_key}
+      DB_HOST: project_postgres
+      MINIO_SERVER_ACCESS_KEY: ${access_key}
+      MINIO_SERVER_SECRET_KEY: ${secret_key}
+    networks:
+      - app-tier
     env_file:
       - .env
 
@@ -48,9 +50,9 @@ services:
       - '9000:9000'
       - '9001:9001'
     environment:
-      - MINIO_ROOT_USER=minioroot
-      - MINIO_ROOT_PASSWORD=miniopassword
-      - MINIO_DEFAULT_BUCKETS=test
+        MINIO_ROOT_USER: minioroot
+        MINIO_ROOT_PASSWORD: miniopassword
+        MINIO_DEFAULT_BUCKETS: test
     networks:
       - app-tier
     env_file:
